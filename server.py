@@ -50,8 +50,9 @@ def threaded_client(conn):
     conn.close()
 
 
-while True:
-    conn, addr = s.accept()
-    print("Connected to: ", addr)
+if __name__ == '__main__':
+    while True:
+        conn, addr = s.accept()
+        print("Connected to: ", addr)
 
-    start_new_thread(threaded_client, (conn,))
+        start_new_thread(threaded_client, (conn,))

@@ -2,7 +2,7 @@ import pygame
 from network import Network
 
 
-class Player():
+class Player:
     width = height = 50
 
     def __init__(self, startx, starty, color=(255, 0, 0)):

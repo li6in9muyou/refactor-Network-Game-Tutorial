@@ -1,6 +1,5 @@
 import socket
 from _thread import *
-import sys
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -26,7 +25,6 @@ def threaded_client(conn):
     global currentId, pos
     conn.send(str.encode(currentId))
     currentId = "1"
-    reply = ''
     while True:
         try:
             data = conn.recv(2048)
@@ -35,16 +33,12 @@ def threaded_client(conn):
                 conn.send(str.encode("Goodbye"))
                 break
             else:
-                print("Recieved: " + reply)
+                print("Received: " + reply)
                 arr = reply.split(":")
-                id = int(arr[0])
-                pos[id] = reply
+                player_id = int(arr[0])
+                pos[player_id] = reply
 
-                if id == 0:
-                    nid = 1
-                if id == 1:
-                    nid = 0
-
+                nid = 1 if player_id == 0 else 1
                 reply = pos[nid][:]
                 print("Sending: " + reply)
 
